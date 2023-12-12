@@ -10,12 +10,12 @@ const port = 3000
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
- extended: true})); 
+    extended: true})); 
 app.use(cors())
 
 //You can use this to check if your server is working
 app.get('/', (req, res)=>{
-res.send("Welcome to your server")
+    res.send("Welcome to your server")
 })
 
 
@@ -27,9 +27,9 @@ app.post('/login', (req, res) =>{
 
 //Route that handles signup logic
 app.post('/signup', (req, res) =>{
-console.log(req.body.fullname) 
-console.log(req.body.username)
-console.log(req.body.password) 
+    console.log(req.body.fullname) 
+    console.log(req.body.username)
+    console.log(req.body.password) 
 })
 
 //Start your server on a specified port
