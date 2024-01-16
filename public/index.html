@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FullStack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>FullStack Exercise</h1>
+    </header>
+    <nav id="notlogNav">
+        <div class="hamburger">
+            <label class="hamburger-button" for="hamburger-checkboxNotLogged">Menu</label>
+        </div>
+        <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkboxNotLogged">
+        <ul class="menu">
+            <li><a onclick="show('Home')" href="#">Home</a></li>
+            <li id="loginButton"><a onclick="show('Login')" href="#">Login</a></li>
+            <li id="signupButton"><a onclick="show('Signup')" href="#">Singup</a></li>
+        </ul>
+    </nav>
+
+    <nav id="logNav">
+        <div class="hamburger">
+            <label class="hamburger-button" for="hamburger-checkboxLogged">Menu</label>
+        </div>
+        <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkboxLogged">
+        <ul class="menu">
+            <li><a onclick="show('Home')" href="#">Home</a></li>
+            <li><a onclick="show('Consult')" href="#">Consult</a></li>
+            <li><a onclick="show('Insert')" href="#">Insert</a></li>
+            <li><a onclick="show('Update')" href="#">Update</a></li>
+            <li><a onclick="show('Delete')" href="#">Delete</a></li>
+            <li><a onclick="delLogout()" href="#">Logout</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <main>
+        <section id="Login">
+            <h3>Login</h3>
+
+            <form id="loginForm">
+                <label for="emailLog">Email: </label>
+                <input type="email" name="emailLog" id="emailLog"><br>
+                <label for="passwordLog">Password: </label>
+                <input type="password" name="passwordRLog" id="passwordLog"><br>
+                <button type="button" onclick="postLogin()">Submit</button><br>
+                <p id="loginText" style="display: none;"></p>
+            </form>
+        </section>
+
+        <section id="Signup">
+            <h3>Sign Up</h3>
+            
+            <form id="signupForm">
+                <label for="emailReg">Email: </label>
+                <input type="email" name="emailReg" id="emailReg"><br>
+                <label for="passwordReg">Password: </label>
+                <input type="password" name="passwordReg" id="passwordReg"><br>
+                <label for="passwordConf">Verify Password: </label>
+                <input type="password" name="passwordConf" id="passwordConf"><br>
+                <button type="button" onclick="postSignup()">Submit</button><br>
+            </form>
+        </section>
+
+        <section id="Consult">
+            <h3>You are consulting the database now</h3>
+            
+            <button type="button" id="getExpenses" onclick="getUserExpenses()">Expenses</button>
+            <button type="button" id="getIncomes" onclick="getUserIncomes()">Income</button>
+            <button type="button" id="getUser" onclick="getUser()">User Info</button><br>
+            
+        </section>
+
+        <section id="Insert">
+            <h3>You are inserting data in the database now</h3>
+            
+            <button type="button" id="insertExpenses" onclick="showForm('IExpensesForm')">Expenses</button>
+            <button type="button" id="insertIncomes" onclick="showForm('IIncomesForm')">Income</button>
+
+            <form class="loggedForm" id="IExpensesForm">
+                <h5>Add a new Expense:</h5>
+                <label for="IExpensesAmount">Amount: </label>
+                <input type="number" min="0" name="IExpensesAmount" id="IExpensesAmount"><br>
+                <label for="IExpensesCategory">Category: </label>
+                <input type="text" name="IExpensesCategory" id="IExpensesCategory"><br>
+                <label for="IExpensesDate">Date: </label>
+                <input type="datetime-local" name="IExpensesDate" id="IExpensesDate"><br>
+                <label for="IExpensesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="IExpensesDescription" id="IExpensesDescription"></textarea><br>
+                <button type="button" onclick="postExpense()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="IIncomesForm">
+                <h5>Add a new Income:</h5>
+                <label for="IIncomesAmount">Amount: </label>
+                <input type="number" min="0" name="IIncomesAmount" id="IIncomesAmount"><br>
+                <label for="IIncomesCategory">Category: </label>
+                <input type="text" name="IIncomesCategory" id="IIncomesCategory"><br>
+                <label for="IIncomesDate">Date: </label>
+                <input type="datetime-local" name="IIncomesDate" id="IIncomesDate"><br>
+                <label for="IIncomesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="IIncomesDescription" id="IIncomesDescription"></textarea><br>
+                <button type="button" onclick="postIncome()">Submit</button><br>
+            </form>
+
+        </section>
+
+        <section id="Update">
+            <h3>You are updating the database now</h3>
+
+            <button type="button" id="updateExpenses" onclick="showForm('UExpensesForm')">Expenses</button>
+            <button type="button" id="updateIncomes" onclick="showForm('UIncomesForm')">Income</button>
+            <button type="button" id="updateUser" onclick="showForm('UUserForm')">User</button>
+
+            <form class="loggedForm" id="UExpensesForm">
+                <h5>Update a Expense:</h5>
+                <label for="UExpensesID">ID: </label>
+                <input type="number" min="0" name="UExpensesID" id="UExpensesID"><br>
+                <label for="UExpensesAmount">Amount: </label>
+                <input type="number" min="0" name="UExpensesAmount" id="UExpensesAmount"><br>
+                <label for="UExpensesCategory">Category: </label>
+                <input type="text" name="UExpensesCategory" id="UExpensesCategory"><br>
+                <label for="UExpensesDate">Date: </label>
+                <input type="datetime-local" name="UExpensesDate" id="UExpensesDate"><br>
+                <label for="UExpensesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="UExpensesDescription" id="UExpensesDescription"></textarea><br>
+                <button type="button" onclick="putExpense()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="UIncomesForm">
+                <h5>Update a Income:</h5>
+                <label for="UIncomesID">ID: </label>
+                <input type="number" min="0" name="UIncomesID" id="UIncomesID"><br>
+                <label for="UIncomesAmount">Amount: </label>
+                <input type="number" min="0" name="UIncomesAmount" id="UIncomesAmount"><br>
+                <label for="UIncomesCategory">Category: </label>
+                <input type="text" name="UIncomesCategory" id="UIncomesCategory"><br>
+                <label for="UIncomesDate">Date: </label>
+                <input type="datetime-local" name="UIncomesDate" id="UIncomesDate"><br>
+                <label for="UIncomesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="UIncomesDescription" id="UIncomesDescription"></textarea><br>
+                <button type="button" onclick="putIncome()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="UUserForm">
+                <label for="UEmail">Email: </label>
+                <input type="email" name="UEmail" id="UEmail"><br>
+                <label for="UPassword">Password: </label>
+                <input type="password" name="UPassword" id="UPassword"><br>
+                <label for="UPasswordConf">Verify Password: </label>
+                <input type="password" name="UPasswordConf" id="UPasswordConf"><br>
+                <button type="button" onclick="putUser()">Submit</button><br>
+            </form>
+
+        </section>
+        
+        <section id="Delete">
+            <h3>You are deleting data from database now</h3>
+
+            <button type="button" id="deleteExpenses" onclick="showForm('DExpensesForm')">Expenses</button>
+            <button type="button" id="deleteIncomes" onclick="showForm('DIncomesForm')">Income</button>
+            <button type="button" id="deleteUser" onclick="showForm('DUserForm')">User</button>
+
+            <form class="loggedForm" id="DExpensesForm">
+                <h5>Type the id of the Expense you wish to delete:</h5>
+                <label for="DExpensesID">ID: </label>
+                <input type="number" min="0" name="DExpensesID" id="DExpensesID"><br>
+                <button type="button" onclick="delExpense()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="DIncomesForm">
+                <h5>Type the id of the Income you wish to delete:</h5>
+                <label for="DIncomesID">ID: </label>
+                <input type="number" min="0" name="DIncomesID" id="DIncomesID"><br>
+                <button type="button" onclick="delIncome()">DELETE</button><br>
+            </form>
+
+            <form class="loggedForm" id="DUserForm">
+                <h5>Confirm your credentials:</h5>
+                <label for="DEmail">Email: </label>
+                <input type="email" name="DEmail" id="DEmail"><br>
+                <label for="UPassword">Password: </label>
+                <input type="password" name="DPassword" id="DPassword"><br>
+                <label for="DPasswordConf">Verify Password: </label>
+                <input type="password" name="DPasswordConf" id="DPasswordConf"><br>
+                <button type="button" onclick="showForm('deleteUserConf')">DELETE</button><br>
+            </form>
+
+            <form class="loggedForm" id="deleteUserConf">
+                <h3 style="color: red;">THIS ACTION WILL DELETE YOUR ACOUNT AND IS NOT REVERSIBLE!</h3><br>
+                <h3 style="color: red;"> ARE U SURE?</h3><br>
+                <button type="button" onclick="delUser()">I AM SURE</button>
+            </form>
+
+        </section>
+
+        <fieldset id="updateField">
+            <legend id="updateLegend"></legend>
+            <p id="updateText"></p>
+            <div id="ConsultView"></div>
+        </fieldset>
+
+    </main>
+    <footer>
+        <h2><i>Desenvolvido por: Vasco João - 30005819</i></h2>
+    </footer>
+</body>
+
+</html>
