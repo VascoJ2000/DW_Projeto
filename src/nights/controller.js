@@ -1,17 +1,17 @@
 const pool = require('../../db');
 const queries = require('./queries');
 
-const getIncomeByUserID = (req, res) => {
+const getNightByUserID = (req, res) => {
     const id = parseInt(req.token.user_id);
-    pool.query(queries.getIncomeByUserID, [id], (err, data) => {
+    pool.query(queries.getNightByUserID, [id], (err, data) => {
         if(err) return res.sendStatus(400);
         res.status(200).json(data.rows);
     });
 }
 
-const getIncomeByID = (req, res) => {
+const getNightByID = (req, res) => {
     const id = parseInt(req.params.id);
-    pool.query(queries.getIncomeByID, [id], (err, data) => {
+    pool.query(queries.getNightByID, [id], (err, data) => {
         if(err) return res.sendStatus(400);
         if(!data.rows.length) return res.sendStatus(404);
         if(!(data.rows[0].user_id === req.token.user_id)) return res.sendStatus(403);
@@ -19,16 +19,15 @@ const getIncomeByID = (req, res) => {
     });
 }
 
-const addIncome = (req, res) => {
+const addNight = (req, res) => {
     const user_id = parseInt(req.token.user_id);
-    const amount = parseFloat(req.body.amount);
-    const category = req.body.category;
-    const income_date  = Date.parse(req.body.date) || new Date();
+    const movie_id = parseFloat(req.body.movie_id);
+    const night_date  = Date.parse(req.body.date) || new Date();
     const description = req.body.description || null;
     
-    pool.query(queries.addIncome, [user_id, amount, category, income_date, description], (err, data) => {
+    pool.query(queries.addNight, [user_id, movie_id, night_date, description], (err, data) => {
         if(err) return res.sendStatus(400);
-        res.status(201).json("Income created Successfully");
+        res.status(201).json("Movie Night created Successfully");
     });
 }
 

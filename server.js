@@ -7,11 +7,11 @@ const fs = require('fs');
 const https = require('https');
 
 const userRoutes = require('./src/users/routes');
-const incomeRoutes = require('./src/incomes/routes');
-const expensesRoutes = require('./src/expenses/routes');
+const nightRoutes = require('./src/nights/routes');
 
 const app = express();
 
+//https server
 const sslServer = https.createServer({
     key: fs.readFileSync('cert/key.pem'),
     cert:fs.readFileSync('cert/certificate.pem')
@@ -32,10 +32,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use('/api/user', userRoutes);
-app.use('/api/income', incomeRoutes);
-app.use('/api/expenses', expensesRoutes);
-
-
+app.use('/api/nights', nightRoutes);
 
 
 sslServer.listen(PORTA, () => {
