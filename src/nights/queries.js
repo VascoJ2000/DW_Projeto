@@ -7,7 +7,7 @@ const updateDate = "UPDATE movie_nights SET movie_night_date = $1 WHERE movie_ni
 const updateDescription = "UPDATE movie_nights SET description = $1 WHERE movie_night_id = $2";
 
 // user_night table queries
-const getNightByUserID = "SELECT user_nights.user_id, user_nights.movie_night_id, movie_id, movie_night_date, user_nights.confirmed, description FROM user_nights INNER JOIN movie_nights ON movie_nights.movie_night_id = user_nights.movie_night_id WHERE (user_id, user_nights.movie_night_id) = ($1, $2)";
+const getNightByUserID = "SELECT user_nights.user_id, user_nights.movie_night_id, movie_id, movie_night_date, user_nights.confirmed, description FROM user_nights INNER JOIN movie_nights ON movie_nights.movie_night_id = user_nights.movie_night_id WHERE user_id = $1";
 const removeNightsUser = "DELETE FROM user_nights WHERE user_id = $1";
 
 module.exports = {

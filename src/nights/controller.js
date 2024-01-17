@@ -19,19 +19,18 @@ const getNightByID = (req, res) => {
     });
 }
 
-const addNight = (req, res) => {
-    const user_id = parseInt(req.token.user_id);
+const addMovieNight = (req, res) => {
     const movie_id = parseFloat(req.body.movie_id);
     const night_date  = Date.parse(req.body.date) || new Date();
     const description = req.body.description || null;
     
-    pool.query(queries.addNight, [user_id, movie_id, night_date, description], (err, data) => {
+    pool.query(queries.addNight, [movie_id, night_date, description], (err, data) => {
         if(err) return res.sendStatus(400);
         res.status(201).json("Movie Night created Successfully");
     });
 }
 
-const removeNight = (req, res) => {
+const removeMovieNight = (req, res) => {
     const id = parseInt(req.params.id);
 
     pool.query(queries.getNightByID, [id], (err, data) => {
@@ -45,7 +44,7 @@ const removeNight = (req, res) => {
     });
 }
 
-const updateNight = (req, res) => {
+const updateMovieNight = (req, res) => {
     const id = parseInt(req.params.id);
 
     pool.query(queries.getNightByID, [id], (err, data) => {
@@ -53,24 +52,18 @@ const updateNight = (req, res) => {
         if(!(data.rows[0].user_id === req.token.user_id)) return res.sendStatus(403);
         
         // Get Night info if can't get defaults to false so the code correspondent to that part is ignored
-        const amount = parseFloat(req.body.amount) || false;
-        const category = req.body.category || false;
-        const income_date = Date.parse(req.body.date) || false;
+        const movie_id = req.body.movie_id || false;
+        const night_date = Date.parse(req.body.date) || false;
         const description = req.body.description || false;
-        if(amount){
-            pool.query(queries.updateAmount, [amount, id], (err, data) => {
-                if(err) return res.sendStatus(400);
-            });
-        }
 
-        if(category){
-            pool.query(queries.updateCategory, [category, id], (err, data) => {
+        if(movie_id){
+            pool.query(queries.updateMovie, [movie_id, id], (err, data) => {
                 if(err) return res.sendStatus(400);
             });
         }
         
-        if(income_date){
-            pool.query(queries.updateDate, [income_date, id], (err, data) => {
+        if(night_date){
+            pool.query(queries.updateDate, [night_date, id], (err, data) => {
                 if(err) return res.sendStatus(400);
             });
         }
