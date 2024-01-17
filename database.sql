@@ -20,6 +20,7 @@ CREATE TABLE user_nights (
     movie_night_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     confirmed BOOLEAN NOT NULL,
+    night_host BOOLEAN NOT NULL,
     FOREIGN KEY (movie_night_id) REFERENCES movie_nights (movie_night_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
     CONSTRAINT user_night_pkey PRIMARY KEY (movie_night_id, user_id)
