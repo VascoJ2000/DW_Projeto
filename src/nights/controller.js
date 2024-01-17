@@ -31,28 +31,28 @@ const addNight = (req, res) => {
     });
 }
 
-const removeIncome = (req, res) => {
+const removeNight = (req, res) => {
     const id = parseInt(req.params.id);
 
-    pool.query(queries.getIncomeByID, [id], (err, data) => {
-        if(!data.rows.length) return res.status(404).send("Income does not exist in the database!");
+    pool.query(queries.getNightByID, [id], (err, data) => {
+        if(!data.rows.length) return res.status(404).send("Movie Night does not exist in the database!");
         if(!(data.rows[0].user_id === req.token.user_id)) return res.sendStatus(403);
         
-        pool.query(queries.removeIncome, [id], (err, data) => {
+        pool.query(queries.removeNights, [id], (err, data) => {
             if(err) return res.sendStatus(400);
-            res.status(204).json("Income removed Successfully")
+            res.status(204).json("Movie Night removed Successfully")
         });
     });
 }
 
-const updateIncome = (req, res) => {
+const updateNight = (req, res) => {
     const id = parseInt(req.params.id);
 
-    pool.query(queries.getIncomeByID, [id], (err, data) => {
-        if(!data.rows.length) return res.send("Income does not exist in the database!");
+    pool.query(queries.getNightByID, [id], (err, data) => {
+        if(!data.rows.length) return res.send("Movie Night does not exist in the database!");
         if(!(data.rows[0].user_id === req.token.user_id)) return res.sendStatus(403);
         
-        // Get income info if can't get defaults to false so the code correspondent to that part is ignored
+        // Get Night info if can't get defaults to false so the code correspondent to that part is ignored
         const amount = parseFloat(req.body.amount) || false;
         const category = req.body.category || false;
         const income_date = Date.parse(req.body.date) || false;
