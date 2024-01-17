@@ -81,10 +81,50 @@ const updateRole = async (req, res) => {
     });
 }
 
+const getFriendlist = (req, res) => {
+    const id = parseInt(req.token.user_id);
+    pool.query(queries.getFriendlist, [id], (err, data) => {
+        if(err) return res.sendStatus(403);
+        res.status(200).json(data.rows);
+    });
+}
+
+const addFriend = async (req, res) => {
+    const id = parseInt(req.token.user_id);
+    const friend_id = parseInt(req.body.friend_id);
+    
+    await pool.query(queries.getUserByID, [friend_id], async (err, data) => {
+        if(err) return res.sendStatus(400);
+        if(!data.rows.length) return res.status(406).send("User does not exist");
+
+        await pool.query(queries.addFriend, [id, friend_id], async (err, data) => {
+            if(err) return res.sendStatus(400);
+            res.status(201).json("Friend Added Successfully");
+        });
+    });
+}
+
+const removeFriend = async (req, res) => {
+    const id = parseInt(req.token.user_id);
+    const friend_id = parseInt(req.params.id);
+
+    await pool.query(queries.getFriend, [id, friend_id], async (err, data) => {
+        if(!data.rows.length) return res.send("User does not exist in your friendlist!");
+        
+        await pool.query(queries.removeUser, [id, friend_id], async (err, data) => {
+            if(err) return res.sendStatus(400);
+            res.status(200).json("Friend removed Successfully")
+        })
+    });
+}
+
 module.exports = {
     getUserByID,
     addUser,
     removeUser,
     updateUser,
     updateRole,
+    getFriendlist,
+    addFriend,
+    removeFriend,
 }
