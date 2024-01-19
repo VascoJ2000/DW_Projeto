@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Night Planner</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="js/script.js"></script>
+
+    <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
 
 <body>
@@ -15,15 +16,15 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand"></a>
-                <form class="d-flex loggedOut">
-                    <button class="btn btn-primary me-2">Login</button>
-                    <button class="btn btn-secondary me-2">Signup</button>
+                <form class="loggedOut">
+                    <button class="btn btn-primary me-2" id="btnNavLogin" type="button">Login</button>
+                    <button class="btn btn-secondary me-2" id="btnNavSignup" type="button">Signup</button>
                 </form>
-                <form class="d-flex loggedIn">
+                <form class="loggedIn">
                     <span class="navbar-text me-2" id="userLogged">
                         user@email.com
                     </span>
-                    <button class="btn btn-warning me-2">Logout</button>
+                    <button class="btn btn-warning me-2" id="btnNavlogout" type="button">Logout</button>
                 </form>
             </div>
         </nav>
@@ -31,7 +32,7 @@
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Movie Night Planner</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,19 +42,104 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link loggedIn" href="#">Nights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link loggedIn" href="#">User</a>
                     </li>
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="button">Search</button>
                 </form>
             </div>
         </div>
     </nav>
+
+    <!-- Modal para Signup novo utilizador -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div class="modal fade" id="modalSignup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Registo de novo utilizador
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">E-Mail</label>
+              <input type="email" class="form-control" id="usernameSignup" name="usernameSignup" placeholder="E-Mail"/>
+              <p id="emailErroLoginSignup"></p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" id="senhaSignup" name="senhaSignup" placeholder="Senha"/>
+              <p id="statusSignup"></p>
+            </div>
+            <div class="modal-footer d-block">
+                <p id="pLogin" class="float-start">
+                    Já tem conta? <a href="#">Entre</a>
+                </p>
+              <button id="btnCancelaSignup" class="btn btn-warning float-end" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-success float-end" id="btnSubmitSignup" onclick="validaRegisto()">
+                Signup
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para fazer login -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Insira suas credenciais
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btnLoginClose"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">E-Mail</label>
+              <input type="email" class="form-control" id="usernameLogin" name="usernameLogin" placeholder="E-Mail"/>
+              <p id="emailErroLogin"></p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" id="senhaLogin" name="senhaLogin" placeholder="Senha"/>
+              <p id="passErroLogin"></p>
+              <p id="statusLogin"></p>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe"/>
+              <label class="form-check-label" for="rememberMe">Lembrar-me</label>
+            </div>
+            <div class="modal-footer d-block">
+              <p id="pSignup" class="float-start">
+                Sem conta ainda? <a href="#">Registe-se</a>
+              </p>
+              <button class="btn btn-warning float-end" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-success float-end" id="btnSubmitLogin" onclick="validaLogin()">
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!--
     <nav id="notlogNav">
         <div class="hamburger">
@@ -247,11 +333,15 @@
             <p id="updateText"></p>
             <div id="ConsultView"></div>
         </fieldset>
-        -->
     </main>
+    -->
     <footer>
         <h2><i>Desenvolvido por: Vasco João - 30005819</i></h2>
     </footer>
+
+    <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="js/script.js"></script>
 </body>
 
 </html>
