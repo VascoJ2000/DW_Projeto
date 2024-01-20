@@ -41,3 +41,13 @@ function login() {
 function logoff() {
     location.reload();
 }
+
+window.addEventListener('scroll', () => {
+    if(window.scrollY > 5){
+        document.getElementById('navbar').classList.add('solid');
+        document.getElementById('navbar').classList.add('bg-dark');
+    }else {
+        document.getElementById('navbar').classList.remove('solid');
+        document.getElementById('navbar').classList.remove('bg-dark');
+    }
+});
