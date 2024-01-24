@@ -60,7 +60,7 @@
             <span class="navbar-text me-2" id="userLogged">
               user@email.com
             </span>
-            <button class="btn btn-warning me-2" id="btnNavlogout" type="button">Logout</button>
+            <button class="btn btn-warning me-2" id="btnNavlogout" type="button" onclick="delLogout()">Logout</button>
           </form>
 
         </div>
@@ -332,7 +332,7 @@
               <button id="btnCancelaSignup" class="btn btn-warning float-end" data-bs-dismiss="modal">
                 Cancelar
               </button>
-              <button class="btn btn-success float-end" id="btnSubmitSignup" onclick="validaRegisto()">
+              <button class="btn btn-success float-end" id="btnSubmitSignup" onclick="postSignup()">
                 Signup
               </button>
             </div>
@@ -375,7 +375,7 @@
               <button class="btn btn-warning float-end" data-bs-dismiss="modal">
                 Cancelar
               </button>
-              <button class="btn btn-success float-end" id="btnSubmitLogin" onclick="validaLogin()">
+              <button class="btn btn-success float-end" id="btnSubmitLogin" onclick="postLogin()">
                 Login
               </button>
             </div>

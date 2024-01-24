@@ -1,5 +1,7 @@
 window.onload = getToken();
 
+const url = 'https://localhost:4000'
+
 function login() {
     const notLogged = document.getElementsByClassName('loggedOut');
     const logged = document.getElementsByClassName('loggedIn');
@@ -21,7 +23,7 @@ function logoff() {
 async function postLogin(){
     const email = document.getElementById('usernameLogin').value;
     const password = document.getElementById('senhaLogin').value;
-    await fetch('https://localhost:4000/api/auth/login', {
+    await fetch(url + '/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -42,7 +44,7 @@ async function postLogin(){
 async function delLogout(){
     const refreshToken = localStorage.getItem('refreshToken');
     if(!refreshToken) return alert('No User is logged in!');
-    fetch('https://localhost:4000/api/auth/logout', {
+    fetch(url + '/api/auth/logout', {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${refreshToken}`
@@ -66,7 +68,7 @@ async function delLogout(){
 async function getToken(){
     const refreshToken = localStorage.getItem('refreshToken');
     if(!refreshToken) return console.log('No token');
-    fetch('https://localhost:4000/api/auth/token', {
+    fetch(url + '/api/auth/token', {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${refreshToken}` }
     })

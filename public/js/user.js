@@ -13,7 +13,7 @@ async function postSignup(){
     })
     .then(response => response.json())
     .then(data => {
-        updateStatus('signupForm', 'Signup', "U have signed in sucessfully. Login to access your account.")
+        //updateStatus('signupForm', 'Signup', "U have signed in sucessfully. Login to access your account.")
         console.log(data)
     })
     .catch(error => console.error('Error:', error));

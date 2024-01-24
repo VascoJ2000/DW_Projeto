@@ -21,9 +21,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(cors({origin: [`https://localhost:${process.env.SERVER_PORT}`, `https://127.0.0.1:${process.env.SERVER_PORT}`]}));
+app.use(cors({origin: [`https://localhost:${process.env.SERVER_PORT}`, `https://127.0.0.1:${process.env.SERVER_PORT}`, 'https://127.0.0.1']}));
 
-const PORTA = process.env.AUTH_PORT || 8887
+const PORTA = process.env.AUTH_PORT || 4000
 
 // Routes
 app.use('/api/auth', authRoutes);

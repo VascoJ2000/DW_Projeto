@@ -5,7 +5,6 @@ const bsModalSignup = new bootstrap.Modal(modalSignup, (backdrop = "static")); /
 
 const btnSignup = document.getElementById('btnNavSignup');
 const btnLogin = document.getElementById('btnNavLogin');
-const btnLogout = document.getElementById('btnNavLogout');
 
 btnSignup.addEventListener('click', () => {
     bsModalSignup.show()
