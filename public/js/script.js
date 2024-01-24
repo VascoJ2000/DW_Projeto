@@ -25,21 +25,14 @@ pLogin.addEventListener("click", () => {
     bsModalLogin.show()
 });
 
-function login() {
-    const notLogged = document.getElementsByClassName('loggedOut');
-    const logged = document.getElementsByClassName('loggedIn');
+function showSection(section) {
+    const sections = document.getElementsByTagName('section')
 
-    for(let i = 0; i<notLogged.length; i++){
-        notLogged[i].style.display = "none";
+    for(let i = 0; i<sections.length; i++){
+        sections[i].style.display = "none"
     }
 
-    for(let i = 0; i<logged.length; i++){
-        logged[i].style.display = "block";
-    }
-}
-
-function logoff() {
-    location.reload();
+    document.getElementById(section).style.display = 'block'
 }
 
 window.addEventListener('scroll', () => {

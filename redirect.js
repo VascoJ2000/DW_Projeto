@@ -2,7 +2,7 @@ const express = require('express');
 const httpApp = express();
 const http = require('http');
 
-httpApp.get("*", function(req, res, next) {
+httpApp.all("*", function(req, res, next) {
     res.redirect("https://" + req.headers.host + req.path);
 });
 http.createServer(httpApp).listen(80, function() {

@@ -8,6 +8,7 @@ const https = require('https');
 
 const userRoutes = require('./src/users/routes');
 const nightRoutes = require('./src/nights/routes');
+const movieRoutes = require('./src/movies/routes');
 
 const app = express();
 
@@ -21,7 +22,7 @@ const sslServer = https.createServer({
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 const PORTA = process.env.SERVER_PORT || 443
 
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/nights', nightRoutes);
+app.use('/api/movies', movieRoutes);
 
 
 sslServer.listen(PORTA, () => {
