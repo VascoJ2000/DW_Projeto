@@ -17,6 +17,23 @@ async function getMovies(type, page) {
     .catch(error => console.error('Error:', error));
 }
 
+async function searchMovies(search, page) {
+    await fetch(`/api/movies/keyword=${search}&page=${page}`, {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        fillPage(data);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 function fillPage(data) {
-    
+
+}
+
+function fillHome(){
+
 }
