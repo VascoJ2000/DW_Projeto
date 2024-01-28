@@ -1,10 +1,9 @@
-window.onload = getToken();
-
 const url = 'https://localhost:4000'
 
-function login() {
+function login(email) {
     const notLogged = document.getElementsByClassName('loggedOut');
     const logged = document.getElementsByClassName('loggedIn');
+    const navEmail = document.getElementById('userLogged');
 
     for(let i = 0; i<notLogged.length; i++){
         notLogged[i].style.display = "none";
@@ -13,6 +12,7 @@ function login() {
     for(let i = 0; i<logged.length; i++){
         logged[i].style.display = "block";
     }
+    navEmail.innerHTML = email
 }
 
 function logoff() {
@@ -35,7 +35,7 @@ async function postLogin(){
     .then(data => {
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
-        login();
+        login(data.email);
         console.log(data)
     })
     .catch(error => console.error('Error:', error));
@@ -76,7 +76,9 @@ async function getToken(){
     .then(data => {
         console.log(data);
         localStorage.setItem('accessToken', data.accessToken);
-        login();
+        login(data.email);
     })
     .catch(error => console.error('Error:', error));
 }
+
+window.onload = getToken();

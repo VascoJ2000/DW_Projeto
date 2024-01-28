@@ -23,7 +23,7 @@ const logIn = async (req, res) => {
 
         await pool.query(queries.saveToken, [user.user_id, refreshToken], async (err, data) => {
             if(err) return res.sendStatus(400);
-            res.json({ accessToken: accessToken, refreshToken: refreshToken });
+            res.json({ accessToken: accessToken, refreshToken: refreshToken, email: user.email });
         })
     });
 }
@@ -41,7 +41,7 @@ const logOut = async (req, res) => {
 
 const refreshAccess = (req, res) => {
     const accessToken = generateAccessToken(req.token);
-    res.json({accessToken: accessToken});
+    res.json({accessToken: accessToken, email: req.token.email});
 }
 
 function generateAccessToken(user) {
