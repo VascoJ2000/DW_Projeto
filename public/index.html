@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Night Planner</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"/>
+
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"/>
+
+    <!-- Personal Styles -->
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body>  
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Movie Night Planner</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" onclick="showSection('home')">Home</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarMoviesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Movies
+              </a>
+              <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarMoviesDropdown">
+                <li><a class="dropdown-item" href="#">Popular</a></li>
+                <li><a class="dropdown-item" href="#">Top Rated</a></li>
+                <li><a class="dropdown-item" href="#">Upcoming</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link loggedIn" href="#" onclick="showSection('nights')">Nights</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link loggedIn" href="#" onclick="showSection('user')">User</a>
+            </li>
+          </ul>
+
+          <form class="loggedOut">
+            <button class="btn btn-primary me-2" id="btnNavLogin" type="button">Login</button>
+            <button class="btn btn-secondary me-2" id="btnNavSignup" type="button">Signup</button>
+          </form>
+
+          <form class="loggedIn">
+            <span class="navbar-text me-2" id="userLogged">
+              user@email.com
+            </span>
+            <button class="btn btn-warning me-2" id="btnNavlogout" type="button" onclick="delLogout()">Logout</button>
+          </form>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div id="carouselHome" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/img/001.jpg" class="imgMid" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/002.jpg" class="imgMid" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/003.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/004.jpg" class="imgMid" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/005.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/006.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/007.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/008.jpg" class="imgMid" alt="">
+        </div>
+      </div>
+    </div>
+ 
+    <div id="homePopular" class="container-fluid p-5">
+      <h2>Popular Movies</h2>
+      <div class="card-wrapper d-flex flex-row flex-nowrap overflow-auto justify-content-center">
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="homeTop" class="container-fluid p-5">
+      <h2>Top Rated Movies</h2>
+      <div class="card-wrapper d-flex flex-row flex-nowrap overflow-auto justify-content-center">
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="homeUpcoming" class="container-fluid p-5">
+      <h2>Upcoming Movies</h2>
+      <div class="card-wrapper d-flex flex-row flex-nowrap overflow-auto justify-content-center">
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+        <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Movie title</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="movies"></section>
+
+  <section id="nights"></section>
+
+  <section id="user"></section>
+
+    <!-- Modal para Signup novo utilizador -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div class="modal fade" id="modalSignup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Registo de novo utilizador
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">E-Mail</label>
+              <input type="email" class="form-control" id="usernameSignup" name="usernameSignup" placeholder="E-Mail"/>
+              <p id="emailErroLoginSignup"></p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" id="senhaSignup" name="senhaSignup" placeholder="Senha"/>
+              <p id="statusSignup"></p>
+            </div>
+            <div class="modal-footer d-block">
+                <p id="pLogin" class="float-start">
+                    Já tem conta? <a href="#">Entre</a>
+                </p>
+              <button id="btnCancelaSignup" class="btn btn-warning float-end" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-success float-end" id="btnSubmitSignup" onclick="postSignup()">
+                Signup
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para fazer login -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Insira suas credenciais
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btnLoginClose"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">E-Mail</label>
+              <input type="email" class="form-control" id="usernameLogin" name="usernameLogin" placeholder="E-Mail"/>
+              <p id="emailErroLogin"></p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" id="senhaLogin" name="senhaLogin" placeholder="Senha"/>
+              <p id="passErroLogin"></p>
+              <p id="statusLogin"></p>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe"/>
+              <label class="form-check-label" for="rememberMe">Lembrar-me</label>
+            </div>
+            <div class="modal-footer d-block">
+              <p id="pSignup" class="float-start">
+                Sem conta ainda? <a href="#">Registe-se</a>
+              </p>
+              <button class="btn btn-warning float-end" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-success float-end" id="btnSubmitLogin" onclick="postLogin()" data-bs-dismiss="modal">
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+    <nav id="notlogNav">
+        <div class="hamburger">
+            <label class="hamburger-button" for="hamburger-checkboxNotLogged">Menu</label>
+        </div>
+        <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkboxNotLogged">
+        <ul class="menu">
+            <li><a onclick="show('Home')" href="#">Home</a></li>
+            <li id="loginButton"><a onclick="show('Login')" href="#">Login</a></li>
+            <li id="signupButton"><a onclick="show('Signup')" href="#">Singup</a></li>
+        </ul>
+    </nav>
+
+    <nav id="logNav">
+        <div class="hamburger">
+            <label class="hamburger-button" for="hamburger-checkboxLogged">Menu</label>
+        </div>
+        <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkboxLogged">
+        <ul class="menu">
+            <li><a onclick="show('Home')" href="#">Home</a></li>
+            <li><a onclick="show('Consult')" href="#">Consult</a></li>
+            <li><a onclick="show('Insert')" href="#">Insert</a></li>
+            <li><a onclick="show('Update')" href="#">Update</a></li>
+            <li><a onclick="show('Delete')" href="#">Delete</a></li>
+            <li><a onclick="delLogout()" href="#">Logout</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <main>
+        <section id="Login">
+            <h3>Login</h3>
+
+            <form id="loginForm">
+                <label for="emailLog">Email: </label>
+                <input type="email" name="emailLog" id="emailLog"><br>
+                <label for="passwordLog">Password: </label>
+                <input type="password" name="passwordRLog" id="passwordLog"><br>
+                <button type="button" onclick="postLogin()">Submit</button><br>
+                <p id="loginText" style="display: none;"></p>
+            </form>
+        </section>
+
+        <section id="Signup">
+            <h3>Sign Up</h3>
+            
+            <form id="signupForm">
+                <label for="emailReg">Email: </label>
+                <input type="email" name="emailReg" id="emailReg"><br>
+                <label for="passwordReg">Password: </label>
+                <input type="password" name="passwordReg" id="passwordReg"><br>
+                <label for="passwordConf">Verify Password: </label>
+                <input type="password" name="passwordConf" id="passwordConf"><br>
+                <button type="button" onclick="postSignup()">Submit</button><br>
+            </form>
+        </section>
+
+        <section id="Consult">
+            <h3>You are consulting the database now</h3>
+            
+            <button type="button" id="getExpenses" onclick="getUserExpenses()">Expenses</button>
+            <button type="button" id="getIncomes" onclick="getUserIncomes()">Income</button>
+            <button type="button" id="getUser" onclick="getUser()">User Info</button><br>
+            
+        </section>
+
+        <section id="Insert">
+            <h3>You are inserting data in the database now</h3>
+            
+            <button type="button" id="insertExpenses" onclick="showForm('IExpensesForm')">Expenses</button>
+            <button type="button" id="insertIncomes" onclick="showForm('IIncomesForm')">Income</button>
+
+            <form class="loggedForm" id="IExpensesForm">
+                <h5>Add a new Expense:</h5>
+                <label for="IExpensesAmount">Amount: </label>
+                <input type="number" min="0" name="IExpensesAmount" id="IExpensesAmount"><br>
+                <label for="IExpensesCategory">Category: </label>
+                <input type="text" name="IExpensesCategory" id="IExpensesCategory"><br>
+                <label for="IExpensesDate">Date: </label>
+                <input type="datetime-local" name="IExpensesDate" id="IExpensesDate"><br>
+                <label for="IExpensesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="IExpensesDescription" id="IExpensesDescription"></textarea><br>
+                <button type="button" onclick="postExpense()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="IIncomesForm">
+                <h5>Add a new Income:</h5>
+                <label for="IIncomesAmount">Amount: </label>
+                <input type="number" min="0" name="IIncomesAmount" id="IIncomesAmount"><br>
+                <label for="IIncomesCategory">Category: </label>
+                <input type="text" name="IIncomesCategory" id="IIncomesCategory"><br>
+                <label for="IIncomesDate">Date: </label>
+                <input type="datetime-local" name="IIncomesDate" id="IIncomesDate"><br>
+                <label for="IIncomesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="IIncomesDescription" id="IIncomesDescription"></textarea><br>
+                <button type="button" onclick="postIncome()">Submit</button><br>
+            </form>
+
+        </section>
+
+        <section id="Update">
+            <h3>You are updating the database now</h3>
+
+            <button type="button" id="updateExpenses" onclick="showForm('UExpensesForm')">Expenses</button>
+            <button type="button" id="updateIncomes" onclick="showForm('UIncomesForm')">Income</button>
+            <button type="button" id="updateUser" onclick="showForm('UUserForm')">User</button>
+
+            <form class="loggedForm" id="UExpensesForm">
+                <h5>Update a Expense:</h5>
+                <label for="UExpensesID">ID: </label>
+                <input type="number" min="0" name="UExpensesID" id="UExpensesID"><br>
+                <label for="UExpensesAmount">Amount: </label>
+                <input type="number" min="0" name="UExpensesAmount" id="UExpensesAmount"><br>
+                <label for="UExpensesCategory">Category: </label>
+                <input type="text" name="UExpensesCategory" id="UExpensesCategory"><br>
+                <label for="UExpensesDate">Date: </label>
+                <input type="datetime-local" name="UExpensesDate" id="UExpensesDate"><br>
+                <label for="UExpensesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="UExpensesDescription" id="UExpensesDescription"></textarea><br>
+                <button type="button" onclick="putExpense()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="UIncomesForm">
+                <h5>Update a Income:</h5>
+                <label for="UIncomesID">ID: </label>
+                <input type="number" min="0" name="UIncomesID" id="UIncomesID"><br>
+                <label for="UIncomesAmount">Amount: </label>
+                <input type="number" min="0" name="UIncomesAmount" id="UIncomesAmount"><br>
+                <label for="UIncomesCategory">Category: </label>
+                <input type="text" name="UIncomesCategory" id="UIncomesCategory"><br>
+                <label for="UIncomesDate">Date: </label>
+                <input type="datetime-local" name="UIncomesDate" id="UIncomesDate"><br>
+                <label for="UIncomesDescription">Description: </label><br>
+                <textarea rows="5" cols="20" name="UIncomesDescription" id="UIncomesDescription"></textarea><br>
+                <button type="button" onclick="putIncome()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="UUserForm">
+                <label for="UEmail">Email: </label>
+                <input type="email" name="UEmail" id="UEmail"><br>
+                <label for="UPassword">Password: </label>
+                <input type="password" name="UPassword" id="UPassword"><br>
+                <label for="UPasswordConf">Verify Password: </label>
+                <input type="password" name="UPasswordConf" id="UPasswordConf"><br>
+                <button type="button" onclick="putUser()">Submit</button><br>
+            </form>
+
+        </section>
+        
+        <section id="Delete">
+            <h3>You are deleting data from database now</h3>
+
+            <button type="button" id="deleteExpenses" onclick="showForm('DExpensesForm')">Expenses</button>
+            <button type="button" id="deleteIncomes" onclick="showForm('DIncomesForm')">Income</button>
+            <button type="button" id="deleteUser" onclick="showForm('DUserForm')">User</button>
+
+            <form class="loggedForm" id="DExpensesForm">
+                <h5>Type the id of the Expense you wish to delete:</h5>
+                <label for="DExpensesID">ID: </label>
+                <input type="number" min="0" name="DExpensesID" id="DExpensesID"><br>
+                <button type="button" onclick="delExpense()">Submit</button><br>
+            </form>
+
+            <form class="loggedForm" id="DIncomesForm">
+                <h5>Type the id of the Income you wish to delete:</h5>
+                <label for="DIncomesID">ID: </label>
+                <input type="number" min="0" name="DIncomesID" id="DIncomesID"><br>
+                <button type="button" onclick="delIncome()">DELETE</button><br>
+            </form>
+
+            <form class="loggedForm" id="DUserForm">
+                <h5>Confirm your credentials:</h5>
+                <label for="DEmail">Email: </label>
+                <input type="email" name="DEmail" id="DEmail"><br>
+                <label for="UPassword">Password: </label>
+                <input type="password" name="DPassword" id="DPassword"><br>
+                <label for="DPasswordConf">Verify Password: </label>
+                <input type="password" name="DPasswordConf" id="DPasswordConf"><br>
+                <button type="button" onclick="showForm('deleteUserConf')">DELETE</button><br>
+            </form>
+
+            <form class="loggedForm" id="deleteUserConf">
+                <h3 style="color: red;">THIS ACTION WILL DELETE YOUR ACOUNT AND IS NOT REVERSIBLE!</h3><br>
+                <h3 style="color: red;"> ARE U SURE?</h3><br>
+                <button type="button" onclick="delUser()">I AM SURE</button>
+            </form>
+
+        </section>
+
+        <fieldset id="updateField">
+            <legend id="updateLegend"></legend>
+            <p id="updateText"></p>
+            <div id="ConsultView"></div>
+        </fieldset>
+    </main>
+    -->
+
+    <footer class="container-fluid text-center p-5 bg-dark">
+      <div class="row">
+        <div class="col-sm-4">
+          <h6 class="text-secondary">Home</h6>
+          <hr>
+          <p>
+            <a href="#">Home</a><br>
+            <a href="#">Movies</a><br>
+            <a class="loggedIn" href="#">Nights</a><br>
+            <a class="loggedIn" href="#">User</a>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <h6 class="text-secondary">Movies</h6>
+          <hr>
+          <p>
+            <a href="#">Popular</a><br>
+            <a href="#">Top Rated</a><br>
+            <a href="#">Upcoming</a>
+          </p>
+        </div>
+
+        <div class="col-sm-4">
+          <h6 class="text-secondary">Contacts</h6>
+          <hr>
+          <p>
+            <i class="fas fa-envelope"></i> 30005819@students.ual.pt
+          </p>
+        </div>
+
+      </div><br>
+      
+      <h4 class="text-secondary"><i>Vasco João - 30005819</i></h4>
+    </footer>
+
+    <!-- Bootstrap 5 js bundle -->
+    <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Javascript Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/nights.js"></script>
+    <script src="js/movies.js"></script>
+</body>
+
+</html>
