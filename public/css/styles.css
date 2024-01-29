@@ -41,13 +41,16 @@ footer a, footer p {
 
 .card {
   margin: 0.5em;
-  width: 150px;
-  height: 300px;
+  width: 200px;
+  height: 400px;
   flex-shrink: 0;
 }
 
 .card-img-top {
-  width: 150px;
-  height: 200px;
+  width: 200px;
+  height: 270px;
 }
 
+.card-wrapper {
+  width: 100%;
+}

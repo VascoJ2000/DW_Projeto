@@ -13,14 +13,13 @@ async function postSignup(){
     })
     .then(response => response.json())
     .then(data => {
-        //updateStatus('signupForm', 'Signup', "U have signed in sucessfully. Login to access your account.")
         console.log(data)
     })
     .catch(error => console.error('Error:', error));
 }
 
 async function getUser(){
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken');
     if(!accessToken) return alert('No User is logged in!');
     fetch('/api/user', {
         method: 'GET',
@@ -37,7 +36,7 @@ async function getUser(){
 async function putUser(){
     const newEmail = document.getElementById('UEmail').value;
     const newPassword = document.getElementById('UPassword').value;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken');
     if(!accessToken) return alert('No User is logged in!');
     const email = newEmail === "" ? false : newEmail;
     const password = newPassword === "" ? false : newPassword;
@@ -61,7 +60,7 @@ async function putUser(){
 }
 
 async function delUser(){
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken');
     if(!accessToken) return alert('No User is logged in!');
     fetch('/api/user', {
         method: 'DELETE',

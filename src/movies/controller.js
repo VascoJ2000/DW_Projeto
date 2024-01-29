@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const getMoviesPopular = async (req, res) => {
     const page = req.params.page || 1
-    const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
+    const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
     const options = {
     method: 'GET',
     headers: {
@@ -48,7 +48,7 @@ const getMoviesTopRated = async (req, res) => {
 
 const getMoviesUpcoming = async (req, res) => {
     const page = req.params.page || 1
-    const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
+    const url = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`;
     const options = {
     method: 'GET',
     headers: {
