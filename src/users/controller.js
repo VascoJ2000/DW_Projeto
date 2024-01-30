@@ -118,6 +118,14 @@ const removeFriend = async (req, res) => {
     });
 }
 
+const getFriendNames = (req, res) => {
+    const id = parseInt(req.token.user_id);
+    pool.query(queries.getFriendNames, [id], (err, data) => {
+        if(err) return res.sendStatus(403);
+        res.status(200).json(data.rows);
+    });
+}
+
 module.exports = {
     getUserByID,
     addUser,
@@ -127,4 +135,5 @@ module.exports = {
     getFriendlist,
     addFriend,
     removeFriend,
+    getFriendNames,
 }

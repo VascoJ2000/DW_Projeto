@@ -15,7 +15,8 @@ router.put('/', authMW.verifyAccess, controller.updateUser);
 router.put('/role', [authMW.verifyAccess, authMW.isAdmin], controller.updateUser);
 
 router.get('/friendlist', authMW.verifyAccess, controller.getFriendlist);
-router.put('/friendlist', authMW.verifyAccess, controller.addFriend);
-router.delete('/friendlist', authMW.verifyAccess, controller.removeFriend);
+router.post('/friendlist', authMW.verifyAccess, controller.addFriend);
+router.delete('/friendlist/:id', authMW.verifyAccess, controller.removeFriend);
+router.get('/friendlist/names', authMW.verifyAccess, controller.getFriendNames);
 
 module.exports = router;
