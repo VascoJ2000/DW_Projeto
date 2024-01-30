@@ -12,7 +12,7 @@ router.get('/top/:page', controller.getMoviesTopRated);
 router.get('/upcoming/:page', controller.getMoviesUpcoming);
 
 router.get('/:id', controller.getMovie);
-router.get('/:keyword&:page', controller.getMovie);
+router.get('/search/:keyword&:page', controller.getSearch);
 
 
 module.exports = router;

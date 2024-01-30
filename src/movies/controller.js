@@ -95,7 +95,7 @@ const getMovie = async (req, res) => {
 const getSearch = async (req, res) => {
     const keyword = req.params.keyword
     const page = req.params.page || 1
-    const url = `https://api.themoviedb.org/3/search/keyword?query=${keyword}&page=${page}`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=false&language=en-US&page=${page}`;
     const options = {
     method: 'GET',
     headers: {

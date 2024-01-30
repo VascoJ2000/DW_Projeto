@@ -96,10 +96,10 @@
       </div>
     </div>
 
-    <nav class="navbar navbar-dark bg-dark">
-      <form class="d-flex">
-        <input class="form-control me-2" id="searchbar" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="button" onclick="searchMovies()">Search</button>
+    <nav class="navbar navbar-dark bg-dark d-flex justify-content-end">
+      <form class="d-flex me-2">
+        <input class="form-control me-2" id="searchbar" type="text" placeholder="Search">
+        <button class="btn btn-outline-success" type="button" onclick="searchMovies('', '1');showSection('movies')">Search</button>
       </form>
     </nav>
   </header>
@@ -119,7 +119,12 @@
   </section>
 
   <section id="movies" class="container-fluid">
+    <h3 id="moviesType">Movies</h3>
     <div id="movieContainer" class="card-wrapper"></div>
+    <div class="navbar navbar-expand-lg d-flex justify-content-end" id="pageNav">
+      <button type="button" class="btn btn-primary me-2" id="btnPage1">Page 1</button>
+      <button type="button" class="btn btn-secondary me-2" id="btnPage2" onclick="">Page 2</button>
+    </div>
   </section>
 
   <section id="nights"></section>
@@ -224,9 +229,9 @@
           <h6 class="text-secondary">Movies</h6>
           <hr>
           <p>
-            <a href="#">Popular</a><br>
-            <a href="#">Top Rated</a><br>
-            <a href="#">Upcoming</a>
+            <a href="#" onclick="getMovies('popular', '1');showSection('movies')">Popular</a><br>
+            <a href="#" onclick="getMovies('top', '1');showSection('movies')">Top Rated</a><br>
+            <a href="#" onclick="getMovies('upcoming', '1');showSection('movies')">Upcoming</a>
           </p>
         </div>
 

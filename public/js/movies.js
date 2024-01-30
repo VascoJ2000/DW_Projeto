@@ -11,20 +11,21 @@ async function getMovies(type, page) {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        fillPage(data);
+        fillPage(data, type, 'getMovies');
     })
     .catch(error => console.error('Error:', error));
 }
 
-async function searchMovies() {
-    const search = document.getElementById('searchbar').search;
-    await fetch(`/api/movies/keyword=${search}&page=1`, {
+async function searchMovies(searchbar, page) {
+    if(searchbar === '') search = document.getElementById('searchbar').value;
+    if (search === '') return getMovies('popular', '1');
+    await fetch(`/api/movies/search/${search}&${page}`, {
         method: 'GET'
     })
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        fillPage(data);
+        fillPage(data, search, 'searchMovies');
     })
     .catch(error => console.error('Error:', error));
 }
@@ -82,13 +83,33 @@ async function fillHome(){
     .catch(error => console.error('Error:', error));
 }
 
-function fillPage(data) {
+function fillPage(data, search, searchType) {
     const movieContainer = document.getElementById('movieContainer');
     movieContainer.innerHTML = '';
     data.results.forEach(movie => {
         const card = createCard(movie);
         movieContainer.appendChild(card);
     })
+    const pageNav = document.getElementById('pageNav');
+    const nextPage = data.page+1;
+    const previousPage = data.page-1;
+    if(data.page === 1){
+        pageNav.innerHTML = `
+        <button type="button" class="btn btn-primary me-2">Page 1</button>
+        <button type="button" class="btn btn-secondary me-2" onclick="${searchType}('${search}', '${nextPage}')">></button>
+        `;
+    }else if(data.page === data.total_pages){
+        pageNav.innerHTML = `
+        <button type="button" class="btn btn-secondary me-2" onclick="${searchType}('${search}', '${previousPage}')"><</button>
+        <button type="button" class="btn btn-primary me-2">Page ${data.page}</button>
+        `;
+    }else {
+        pageNav.innerHTML = `
+        <button type="button" class="btn btn-secondary me-2" onclick="${searchType}('${search}', '${previousPage}')"><</button>
+        <button type="button" class="btn btn-primary me-2">Page ${data.page}</button>
+        <button type="button" class="btn btn-secondary me-2" onclick="${searchType}('${search}', '${nextPage}')">></button>
+        `;
+    }
 }
 
 function createCard(movie) {
