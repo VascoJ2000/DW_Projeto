@@ -14,7 +14,6 @@ const getMoviesPopular = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -37,7 +36,6 @@ const getMoviesTopRated = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -60,7 +58,6 @@ const getMoviesUpcoming = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -83,7 +80,6 @@ const getMovie = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -107,7 +103,6 @@ const getSearch = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
