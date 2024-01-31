@@ -9,10 +9,11 @@ const updateActive = "UPDATE users SET active = $1 WHERE user_id = $2";
 const updateRole = "UPDATE users SET role = $1 WHERE user_id = $2";
 
 // Friendlist Table
-const getFriendlist = "SELECT * FROM friendlist WHERE user_id = $1";
-const getFriend = "SELECT * FROM friendlist WHERE user_id = $1 AND friend_id = $2";
-const addFriend = "INSERT INTO friendlist (user_id, friend_id) VALUES ($1, $2)";
-const removeFriend = "DELETE FROM friendlist WHERE user_id = $1 AND friend_id = $2";
+const getFriendlist = "SELECT * FROM friendlists WHERE user_id = $1";
+const getFriend = "SELECT * FROM friendlists WHERE user_id = $1 AND friend_id = $2";
+const addFriend = "INSERT INTO friendlists (user_id, friend_id) VALUES ($1, $2)";
+const removeFriend = "DELETE FROM friendlists WHERE user_id = $1 AND friend_id = $2";
+const getFriendNames = "SELECT friend_id, email FROM friendlists INNER JOIN users ON friendlists.friend_id = users.user_id WHERE friendlists.user_id = $1";
 
 module.exports = {
     getUserByID,
@@ -27,4 +28,5 @@ module.exports = {
     getFriend,
     addFriend,
     removeFriend,
+    getFriendNames,
 };

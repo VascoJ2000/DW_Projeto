@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const getMoviesPopular = async (req, res) => {
     const page = req.params.page || 1
-    const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
+    const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
     const options = {
     method: 'GET',
     headers: {
@@ -14,7 +14,6 @@ const getMoviesPopular = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -37,7 +36,6 @@ const getMoviesTopRated = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -48,7 +46,7 @@ const getMoviesTopRated = async (req, res) => {
 
 const getMoviesUpcoming = async (req, res) => {
     const page = req.params.page || 1
-    const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
+    const url = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`;
     const options = {
     method: 'GET',
     headers: {
@@ -60,7 +58,6 @@ const getMoviesUpcoming = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -83,7 +80,6 @@ const getMovie = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {
@@ -95,7 +91,7 @@ const getMovie = async (req, res) => {
 const getSearch = async (req, res) => {
     const keyword = req.params.keyword
     const page = req.params.page || 1
-    const url = `https://api.themoviedb.org/3/search/keyword?query=${keyword}&page=${page}`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=false&language=en-US&page=${page}`;
     const options = {
     method: 'GET',
     headers: {
@@ -107,7 +103,6 @@ const getSearch = async (req, res) => {
     await fetch(url, options)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
         res.status(200).json(json)
     })
     .catch(err => {

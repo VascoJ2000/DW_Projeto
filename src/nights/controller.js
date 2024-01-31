@@ -28,15 +28,18 @@ const getNightByID = (req, res) => {
 const addMovieNight = (req, res) => {
     const id = parseInt(req.token.user_id);
     const movie_id = parseInt(req.body.movie_id);
-    const night_date  = Date.parse(req.body.date) || new Date();
+    const night_date  = req.body.date
     const description = req.body.description || null;
     
     pool.query(queries.addNight, [movie_id, night_date, description], (err, data) => {
         if(err) return res.sendStatus(400);
-
-        pool.query(queries.addUserNight, [id, movie_id, true],(err, data) => {
+        pool.query(queries.getNight, [movie_id, night_date, description], (err, data2) => {
             if(err) return res.sendStatus(400);
-            res.status(201).json("Movie Night created Successfully");
+
+            pool.query(queries.addUserNight, [id, data2.rows[0].movie_night_id, true, true],(err, data3) => {
+                if(err) return res.sendStatus(400);
+                res.status(201).json("Movie Night created Successfully");
+            });
         });
     });
 }
@@ -45,7 +48,7 @@ const addUserToNight = (req, res) => {
     const id = parseInt(req.body.user_id);
     const movie_id = parseInt(req.body.movie_id);
 
-    pool.query(queries.addUserNight, [id, movie_id, false],(err, data) => {
+    pool.query(queries.addUserNight, [id, movie_id, false, false],(err, data) => {
         if(err) return res.sendStatus(400);
         res.status(201).json("User added to Movie Night Successfully");
     });

@@ -33,8 +33,8 @@ async function postLogin(){
     })
     .then(response => response.json())
     .then(data => {
-        localStorage.setItem('accessToken', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
+        sessionStorage.setItem('accessToken', data.accessToken);
+        sessionStorage.setItem('refreshToken', data.refreshToken);
         login(data.email);
         console.log(data)
     })
@@ -42,7 +42,7 @@ async function postLogin(){
 }
 
 async function delLogout(){
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = sessionStorage.getItem('refreshToken');
     if(!refreshToken) return alert('No User is logged in!');
     fetch(url + '/api/auth/logout', {
         method: 'DELETE',
@@ -52,21 +52,21 @@ async function delLogout(){
     })
     .then(response => response.json())
     .then(data => {
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('accessToken');
+        sessionStorage.removeItem('refreshToken');
+        sessionStorage.removeItem('accessToken');
         location.reload();
         console.log(data);
     })
     .catch(error => {
         console.error('Error:', error);
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('accessToken');
+        sessionStorage.removeItem('refreshToken');
+        sessionStorage.removeItem('accessToken');
         location.reload();
     });
 }
 
 async function getToken(){
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = sessionStorage.getItem('refreshToken');
     if(!refreshToken) return console.log('No token');
     fetch(url + '/api/auth/token', {
         method: 'GET',
@@ -75,7 +75,7 @@ async function getToken(){
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        localStorage.setItem('accessToken', data.accessToken);
+        sessionStorage.setItem('accessToken', data.accessToken);
         login(data.email);
     })
     .catch(error => console.error('Error:', error));
