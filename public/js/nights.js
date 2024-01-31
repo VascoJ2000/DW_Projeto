@@ -119,6 +119,7 @@ async function delNight(){
     })
     .catch(error => {
         console.error('Error:', error);
+        getUserNight();
     });
 }
 

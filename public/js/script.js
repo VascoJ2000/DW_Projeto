@@ -43,3 +43,5 @@ window.addEventListener('scroll', () => {
         document.getElementById('navbar').classList.remove('bg-dark');
     }
 });
+
+window.onload = showSection('home');
