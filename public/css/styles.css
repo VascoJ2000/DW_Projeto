@@ -13,18 +13,12 @@
 }
 
 .carousel-inner {
-  height: 400px;
+  height: 200px;
 }
 
 .carousel-item {
   position: relative;
   height: 100%;
-}
-
-.carousel-item .imgMid {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .carousel-item img {
@@ -37,6 +31,10 @@ footer p {
 
 footer a, footer p {
   color: gray;
+}
+
+section {
+  display: none;
 }
 
 .card {
@@ -53,4 +51,16 @@ footer a, footer p {
 
 .card-wrapper {
   width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-inner {
+    height: 400px;
+  }
+
+  .carousel-item .imgMid {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
