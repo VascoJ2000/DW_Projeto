@@ -1,9 +1,18 @@
 const nightModal = document.getElementById('nightModal');
-const bsnightModal = new bootstrap.Modal(nightModal, (backdrop = "static")); // Pode passar opções
+const bsnightModal = new bootstrap.Modal(nightModal, (backdrop = "static"));
+
+const deleteModal = document.getElementById('deleteModal');
+const bsdeleteModal = new bootstrap.Modal(deleteModal, (backdrop = "static"));
 
 const modalMovie = document.getElementById('nightMovieModal');
 const modalDate = document.getElementById('nightDateModal');
 const modalDescription = document.getElementById('nightDescriptionModal');
+
+const modalSaveBtn = document.getElementById('nightModalSaveBtn');
+const modalEditBtn = document.getElementById('nightModalEditBtn');
+const nightIdModal = document.getElementById('nightIdModal');
+
+const modalNight = document.getElementById('deleteNightModal');
 
 async function getUserNight(){
     const accessToken = sessionStorage.getItem('accessToken');
@@ -17,8 +26,12 @@ async function getUserNight(){
         console.log(data);
         generateTableHeader(data)
         generateTableBody(data);
+        document.getElementById('noNightFound').style.display = 'none'
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error)
+        document.getElementById('noNightFound').style.display = 'block'
+    });
 }
 
 async function getNight(id){
@@ -60,14 +73,14 @@ async function postNight(){
     .catch(error => console.error('Error:', error));
 }
 
-async function putNight(id){
+async function putNight(){
     const accessToken = sessionStorage.getItem('accessToken');
     if(!accessToken) return alert('No User is logged in!');
 
     const movie_id = modalMovie.value;
-    const inputDate = modalDate.value;
-    const date = new Date(inputDate).toISOString().split('T')[0];
+    const date = modalDate.value;
     const description = modalDescription.value;
+    const id = nightIdModal.value;
 
     fetch(`/api/nights/${id}`, {
         method: 'PUT',
@@ -84,13 +97,17 @@ async function putNight(id){
     .then(response => response.json())
     .then(data => {
         console.log(data);
+        getUserNight();
     })
     .catch(error => console.error('Error:', error));
 }
 
-async function delNight(id){
+async function delNight(){
     const accessToken = sessionStorage.getItem('accessToken');
     if(!accessToken) return alert('No User is logged in!');
+
+    const id = modalNight.value;
+
     fetch(`/api/nights/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${accessToken}` }
@@ -98,35 +115,40 @@ async function delNight(id){
     .then(response => response.json())
     .then(data => {
         console.log(data);
+        getUserNight();
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
 
-// Function to generate table header dynamically
 function generateTableHeader(data) {
     const tableHeader = document.querySelector('#nightsTable thead');
     const headerRow = document.createElement('tr');
 
-    // Assuming the first object in the array has all the fields
+    tableHeader.innerHTML = '';
+
     Object.keys(data[0]).forEach(field => {
         const th = document.createElement('th');
         th.textContent = field;
         headerRow.appendChild(th);
     });
 
-    // Add an extra column for Edit button
     const editTh = document.createElement('th');
-    editTh.textContent = 'Actions';
+    editTh.textContent = 'Edit';
     headerRow.appendChild(editTh);
+
+    const delTh = document.createElement('th');
+    delTh.textContent = 'Delete';
+    headerRow.appendChild(delTh);
 
     tableHeader.appendChild(headerRow);
 }
 
-// Function to generate table body dynamically
 function generateTableBody(data) {
     const tableBody = document.querySelector('#nightsTable tbody');
+
+    tableBody.innerHTML = ''
 
     data.forEach(rowData => {
         const row = document.createElement('tr');
@@ -137,27 +159,49 @@ function generateTableBody(data) {
             row.appendChild(td);
         });
 
-        // Add an Edit button to each row
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
         editButton.classList.add('btn', 'btn-primary', 'btn-sm');
-        editButton.addEventListener('click', () => createNight(rowData.movie_id, rowData.movie_night_date, rowData.description));
+        editButton.addEventListener('click', () => createNight(rowData.movie_id, rowData.movie_night_date, rowData.description, rowData.movie_night_id));
         
         const td = document.createElement('td');
         td.appendChild(editButton);
         row.appendChild(td);
 
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+        deleteButton.addEventListener('click', () => deleteNight(rowData.movie_night_id));
+        
+        const td2 = document.createElement('td');
+        td2.appendChild(deleteButton);
+        row.appendChild(td2);
+
         tableBody.appendChild(row);
     });
 }
 
-function createNight(movie_id, date, description) {
+function createNight(movie_id, date, description, night_id) {
     modalMovie.value = movie_id;
     if(!date === '') {
-        const dates = date.split(' ');
-        modalDate.value = dates[0] + 'T' + dates[1];
+        modalDate.value = new Date(date);
     }
     modalDescription.value = description;
 
+    if(night_id) {
+        modalEditBtn.style.display = 'inline-block';
+        modalSaveBtn.style.display = 'none';
+        nightIdModal.value = night_id;
+    }else {
+        modalEditBtn.style.display = 'none';
+        modalSaveBtn.style.display = 'inline-block';
+    }
+
     bsnightModal.show();
+}
+
+function deleteNight(night_id) {
+    modalNight.value = night_id;
+
+    bsdeleteModal.show()
 }

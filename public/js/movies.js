@@ -119,7 +119,7 @@ function createCard(movie) {
         <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="card-img-top" alt="${movie.title}">
         <div class="card-body d-flex flex-column">
             <h5 class="card-title">${movie.title}</h5>
-            <a href="#" class="btn btn-primary d-block mt-auto" onclick="createNight(${movie.id}, '', '')">Create Night</a>
+            <a href="#" class="btn btn-primary d-block mt-auto" onclick="createNight(${movie.id}, '', '', ${false})">Create Night</a>
         </div>
     `;
     return card;

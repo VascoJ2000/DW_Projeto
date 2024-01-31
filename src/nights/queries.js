@@ -3,7 +3,7 @@ const getNightByID = "SELECT * FROM movie_nights WHERE movie_night_id = $1";
 const addNight = "INSERT INTO movie_nights (movie_id, movie_night_date, description) VALUES ($1, TO_TIMESTAMP($2, 'YYYY-MM-DDTHH24:MI'), $3)";
 const removeNights = "DELETE FROM movie_nights WHERE movie_night_id = $1";
 const updateMovie = "UPDATE movie_nights SET movie_id = $1 WHERE movie_night_id = $2";
-const updateDate = "UPDATE movie_nights SET movie_night_date = $1 WHERE movie_night_id = $2";
+const updateDate = "UPDATE movie_nights SET movie_night_date = TO_TIMESTAMP($1, 'YYYY-MM-DDTHH24:MI') WHERE movie_night_id = $2";
 const updateDescription = "UPDATE movie_nights SET description = $1 WHERE movie_night_id = $2";
 const getNight = "SELECT * FROM movie_nights WHERE movie_id = $1 AND movie_night_date = TO_TIMESTAMP($2, 'YYYY-MM-DDTHH24:MI') AND description = $3";
 
